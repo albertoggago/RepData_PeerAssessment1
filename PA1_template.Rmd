@@ -60,11 +60,25 @@ DFsum <- aggregate(DF$steps,by=list(DF$date),FUN=sum, na.rm=TRUE)
 names(DFsum) <- c("date","totalSteps")
 
 # I added the mean and median to title of histogram
-hist(DFsum$totalSteps, main=paste("Histogram total Steps, mean ", 
-    sprintf("%.2f",mean(DFsum$totalSteps)), " median", 
-    sprintf("%.2f",median(DFsum$totalSteps))), breaks = 25, 
-    xlab = "Total Steps")
+hist(DFsum$totalSteps, main="Histogram total Steps", 
+    xlab = "Total Steps", breaks = 25)
 ```
+
+\newpage
+
+### Mean per day
+
+```{r, mean calculate per day}
+plot(aggregate(DF$steps, by=list(DF$date), mean, na.rm=TRUE), DF$date)
+```
+
+### Median per day
+
+```{r, mode calculate per day}
+plot(aggregate(DF$steps, by=list(DF$date), median, na.rm=TRUE),DF$date)
+
+```
+
 
 \newpage
 
@@ -79,10 +93,21 @@ DF5min <- aggregate(DF$steps,by=list(DF$interval),FUN=mean, na.rm=TRUE)
 names(DF5min) <- c("interval","average")
 
 plot(DF5min$interval, DF5min$average, type="l", col="dark blue", lwd=3, 
-     main = "Average of steps per 5 min Interval", 
+     main = paste("Max number of steps are:",
+                  sprintf("%.2f",max(DF5min$average)),
+                  ", in interval:", 
+                  DF5min$interval[max(DF5min$average)==DF5min$average]), 
      xlab="5 min interval", ylab="average steps")
+abline(v=DF5min$interval[max(DF5min$average)==DF5min$average], 
+       col="red", lwd=3, lty=3)
+abline(h=max(DF5min$average), col="red", lwd=3, lty=3)
+```
+
+```{r show max point to steps}
+
 
 ```
+
 
 \newpage
 

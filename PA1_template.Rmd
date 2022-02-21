@@ -60,8 +60,10 @@ DFsum <- aggregate(DF$steps,by=list(DF$date),FUN=sum, na.rm=TRUE)
 names(DFsum) <- c("date","totalSteps")
 
 # I added the mean and median to title of histogram
-hist(DFsum$totalSteps, main="Histogram total Steps", 
-    xlab = "Total Steps", breaks = 25)
+hist(DFsum$totalSteps, main=paste("Histogram total Steps, mean ", 
+    sprintf("%.2f",mean(DFsum$totalSteps)), " median", 
+    sprintf("%.2f",median(DFsum$totalSteps))), breaks = 25, 
+    xlab = "Total Steps")
 ```
 
 \newpage
